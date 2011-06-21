@@ -1,3 +1,6 @@
+# == Description
 module Bourbon
-  # Your code goes here...
+  def label(obj, field, display='', options={})
+    
+  end
 end
