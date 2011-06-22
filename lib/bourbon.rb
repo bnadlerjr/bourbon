@@ -3,7 +3,7 @@ module Bourbon
   # Generates a label tag. The 'for' attribute of the tag is scoped to the
   # given +obj+ and +field+.
   #
-  # Options::
+  # options::
   #   :text::
   #     Custom label text. Defaults to the field name if not given.
   def label(obj, field, options={})
@@ -21,5 +21,15 @@ module Bourbon
   def text(obj, field, options={})
     required = options.delete(:required) ? 'required ' : ''
     "<input type=\"text\" id=\"#{obj}_#{field}\" name=\"#{obj}[#{field}]\" #{required}/>"
+  end
+
+  # Generate a submit input tag.
+  #
+  # options::
+  #   :text::
+  #     The button text; defaults to 'Submit'.
+  def submit(options={})
+    button_text = options.delete(:text) || 'Submit'
+    "<input type=\"submit\" value=\"#{button_text}\" />"
   end
 end
