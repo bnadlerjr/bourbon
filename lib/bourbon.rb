@@ -8,7 +8,8 @@ module Bourbon
   #     Custom label text. Defaults to the field name if not given.
   def label(obj, field, options={})
     label_text = options.delete(:text) || field
-    "<label for=\"#{obj}[#{field}]\">#{label_text}</label>"
+    options.merge!(:for => "#{obj}[#{field}]")
+    tag('label', options, label_text)
   end
 
   # Generates an input tag of type 'text'.The id attribute is set to the
@@ -19,17 +20,29 @@ module Bourbon
   #   :required:: true | false
   #     If true, inserts an HTML5 'required' attribute.
   def text(obj, field, options={})
-    required = options.delete(:required) ? 'required ' : ''
-    "<input type=\"text\" id=\"#{obj}_#{field}\" name=\"#{obj}[#{field}]\" #{required}/>"
+    options.merge!(:type => 'text', :id => "#{obj}_#{field}",
+      :name => "#{obj}[#{field}]")
+
+    options.merge!(:required => nil) if options[:required]
+    tag('input', options)
   end
 
   # Generate a submit input tag.
   #
   # options::
-  #   :text::
+  #   :value::
   #     The button text; defaults to 'Submit'.
   def submit(options={})
-    button_text = options.delete(:text) || 'Submit'
-    "<input type=\"submit\" value=\"#{button_text}\" />"
+    options.merge!(:value => 'Submit') unless options[:value]
+    options.merge!(:type => 'submit')
+    tag('input', options)
   end
+
+  private
+
+    def tag(name, attributes, content=nil)
+      attr_str = attributes.map { |k, v| v ? "#{k}=\"#{v}\"" : k }.join(' ')
+      result = "<#{name} #{attr_str}"
+      result += content ? ">#{content}</#{name}>" : " />"
+    end
 end

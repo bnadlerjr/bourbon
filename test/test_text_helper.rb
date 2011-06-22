@@ -11,7 +11,7 @@ class TestTextHelper < Test::Unit::TestCase
   end
 
   def test_required_text_field
-    expected = '<input type="text" id="obj_item" name="obj[item]" required />'
+    expected = '<input required type="text" id="obj_item" name="obj[item]" />'
     actual = text :obj, :item, :required => true
 
     assert_equal expected, actual

@@ -4,15 +4,15 @@ class TestSubmitHelper < Test::Unit::TestCase
   include Bourbon
 
   def test_basic_submit_tag
-    expected = '<input type="submit" value="Submit" />'
+    expected = '<input value="Submit" type="submit" />'
     actual = submit
 
     assert_equal expected, actual
   end
 
   def test_submit_tag_with_custom_button_text
-    expected = '<input type="submit" value="Go!" />'
-    actual = submit :text => 'Go!'
+    expected = '<input value="Go!" type="submit" />'
+    actual = submit :value => 'Go!'
 
     assert_equal expected, actual
   end
