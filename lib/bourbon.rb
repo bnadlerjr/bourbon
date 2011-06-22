@@ -51,6 +51,13 @@ module Bourbon
       tag('input', attrs, label)
     end
 
+    # Generates a select tag. Also generates option tags using +collection+.
+    def select(obj, field, collection, attrs={})
+      opt_tags = collection.map { |k, v| tag('option', { :value => k}, v) }
+      attrs.merge!(:id => "#{obj}_#{field}", :name => "#{obj}[#{field}]")
+      tag('select', attrs, opt_tags.join(''))
+    end
+
     private
 
       def tag(name, attributes, content=nil)

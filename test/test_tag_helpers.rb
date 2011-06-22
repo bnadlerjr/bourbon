@@ -65,4 +65,17 @@ class TestTagHelpers < Test::Unit::TestCase
 
     assert_equal expected, actual
   end
+
+  def test_basic_select_field
+    expected = [
+      '<select id="obj_item" name="obj[item]">',
+      '<option value="1">One</option>',
+      '<option value="2">Two</option>',
+      '<option value="3">Three</option>',
+      '</select>'].join('')
+
+    actual = select :obj, :item, { 1 => 'One', 2 => 'Two', 3 => 'Three' }
+
+    assert_equal expected, actual
+  end
 end
