@@ -35,6 +35,14 @@ module Bourbon
       tag('textarea', attrs, content)
     end
 
+    # Generates a checkbox input tag.
+    def checkbox(obj, field, attrs={})
+      attrs.merge!(:type => 'checkbox', :id => "#{obj}_#{field}",
+        :name => "#{obj}[#{field}]")
+
+      tag('input', attrs)
+    end
+
     private
 
       def tag(name, attributes, content=nil)
