@@ -43,6 +43,14 @@ module Bourbon
       tag('input', attrs)
     end
 
+    # Generates a radio button
+    def radio(obj, field, attrs={}, label=nil)
+      attrs.merge!(:type => 'radio', :id => "#{obj}_#{field}",
+        :name => "#{obj}[#{field}]")
+
+      tag('input', attrs, label)
+    end
+
     private
 
       def tag(name, attributes, content=nil)

@@ -58,4 +58,11 @@ class TestTagHelpers < Test::Unit::TestCase
 
     assert_equal expected, actual
   end
+
+  def test_basic_radio_field
+    expected = '<input value="yes" type="radio" id="obj_item" name="obj[item]" />'
+    actual = radio :obj, :item, :value => 'yes'
+
+    assert_equal expected, actual
+  end
 end
