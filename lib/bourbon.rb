@@ -23,7 +23,6 @@ module Bourbon
     options.merge!(:type => 'text', :id => "#{obj}_#{field}",
       :name => "#{obj}[#{field}]")
 
-    options.merge!(:required => nil) if options[:required]
     tag('input', options)
   end
 
@@ -38,9 +37,16 @@ module Bourbon
     tag('input', options)
   end
 
+  # Generates a textarea input tag.
+  def text_area(obj, field, options={}, content='')
+    options.merge!(:id => "#{obj}_#{field}", :name => "#{obj}[#{field}]")
+    tag('textarea', options, content)
+  end
+
   private
 
     def tag(name, attributes, content=nil)
+      attributes.merge!(:required => nil) if attributes[:required]
       attr_str = attributes.map { |k, v| v ? "#{k}=\"#{v}\"" : k }.join(' ')
       result = "<#{name} #{attr_str}"
       result += content ? ">#{content}</#{name}>" : " />"
