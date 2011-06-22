@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class TestTextHelper < Test::Unit::TestCase
-  include Bourbon
+  include Bourbon::TagHelpers
 
   def test_basic_text_field
     expected = '<input type="text" id="obj_item" name="obj[item]" />'

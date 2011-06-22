@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class TestSubmitHelper < Test::Unit::TestCase
-  include Bourbon
+  include Bourbon::TagHelpers
 
   def test_basic_submit_tag
     expected = '<input value="Submit" type="submit" />'

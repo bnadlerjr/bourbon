@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class TestLabelHelper < Test::Unit::TestCase
-  include Bourbon
+  include Bourbon::TagHelpers
 
   def test_label_text_uses_field_if_not_given
     expected = '<label for="obj[item]">item</label>'
