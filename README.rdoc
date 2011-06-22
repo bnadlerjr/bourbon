@@ -2,8 +2,18 @@
 HTML Form Helpers for Sinatra.
 
 == Install
+Require the repo in your Gemfile or put the repo in a /vendor folder and make
+sure it is in your $LOAD_PATH.
 
 == Notes / Use
+In your Sinatra app:
+    require 'bourbon'
+
+    class MyApp < Sinatra::Base
+      helpers Bourbon::TagHelpers
+    end
+
+Then just call the helpers in your views.
 
 == Patches / Pull Requests
 * Fork the project.
