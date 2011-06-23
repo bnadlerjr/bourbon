@@ -75,9 +75,9 @@ module Bourbon
       end
 
       def name_for(obj, field)
-        obj = [obj] unless obj.is_a?(Array)
-        len = obj.length
-        obj[0].to_s + obj[1..len].map { |o| "[#{o}]" }.join('') + "[#{field}]"
+        objects = obj.is_a?(Array) ? obj : [obj]
+        first = objects.shift
+        first.to_s + objects.map { |o| "[#{o}]" }.join('') + "[#{field}]"
       end
   end
 end
