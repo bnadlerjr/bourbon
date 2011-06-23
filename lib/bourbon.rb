@@ -10,7 +10,7 @@ module Bourbon
     # Generates a label tag.
     def label(obj, field, attrs={})
       label_text = attrs.delete(:text) || field
-      attrs.merge!(:for => "#{obj}[#{field}]") if obj && field
+      attrs.merge!(:for => id_for(obj, field)) if obj && field
       tag('label', attrs, label_text)
     end
 

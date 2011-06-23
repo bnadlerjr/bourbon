@@ -20,14 +20,14 @@ class TestTagHelpers < Test::Unit::TestCase
   end
 
   def test_label_text_uses_field_if_not_given
-    expected = '<label for="obj[item]">item</label>'
+    expected = '<label for="obj_item">item</label>'
     actual = label :obj, :item
 
     assert_equal expected, actual
   end
 
   def test_label_with_custom_text
-    expected = '<label for="obj[item]">My Label</label>'
+    expected = '<label for="obj_item">My Label</label>'
     actual = label :obj, :item, :text => 'My Label'
 
     assert_equal expected, actual
@@ -36,6 +36,13 @@ class TestTagHelpers < Test::Unit::TestCase
   def test_label_skips_for_if_nil
     expected = '<label>My Label</label>'
     actual = label nil, nil, :text => 'My Label'
+
+    assert_equal expected, actual
+  end
+
+  def test_label_with_nested_object
+    expected = '<label for="obj_sub_item">My Label</label>'
+    actual = label [:obj, :sub], :item, :text => 'My Label'
 
     assert_equal expected, actual
   end
