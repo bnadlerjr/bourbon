@@ -16,8 +16,8 @@ module Bourbon
 
     # Generates text input tag.
     def text(obj, field, attrs={})
-      attrs.merge!(:type => 'text', :id => "#{obj}_#{field}",
-        :name => "#{obj}[#{field}]")
+      attrs.merge!(:type => 'text', :id => id_for(obj, field),
+        :name => name_for(obj, field))
 
       tag('input', attrs)
     end
@@ -31,22 +31,22 @@ module Bourbon
 
     # Generates a textarea input tag.
     def text_area(obj, field, attrs={}, content='')
-      attrs.merge!(:id => "#{obj}_#{field}", :name => "#{obj}[#{field}]")
+      attrs.merge!(:id => id_for(obj, field), :name => name_for(obj, field))
       tag('textarea', attrs, content)
     end
 
     # Generates a checkbox input tag.
     def checkbox(obj, field, attrs={})
-      attrs.merge!(:type => 'checkbox', :id => "#{obj}_#{field}",
-        :name => "#{obj}[#{field}]")
+      attrs.merge!(:type => 'checkbox', :id => id_for(obj, field),
+        :name => name_for(obj, field))
 
       tag('input', attrs)
     end
 
     # Generates a radio button
     def radio(obj, field, attrs={}, label=nil)
-      attrs.merge!(:type => 'radio', :id => "#{obj}_#{field}",
-        :name => "#{obj}[#{field}]")
+      attrs.merge!(:type => 'radio', :id => id_for(obj, field),
+        :name => name_for(obj, field))
 
       tag('input', attrs, label)
     end
@@ -54,7 +54,7 @@ module Bourbon
     # Generates a select tag. Also generates option tags using +collection+.
     def select(obj, field, collection, attrs={})
       opt_tags = collection.map { |k, v| tag('option', { :value => k}, v) }
-      attrs.merge!(:id => "#{obj}_#{field}", :name => "#{obj}[#{field}]")
+      attrs.merge!(:id => id_for(obj, field), :name => name_for(obj, field))
       tag('select', attrs, opt_tags.join(''))
     end
 
@@ -67,6 +67,17 @@ module Bourbon
         attr_str = attributes.map { |k, v| v ? "#{k}=\"#{v}\"" : k }.join(' ')
         result = '' == attr_str ? "<#{name}" : "<#{name} #{attr_str}"
         result += content ? ">#{content}</#{name}>" : " />"
+      end
+
+      def id_for(obj, field)
+        obj = [obj] unless obj.is_a?(Array)
+        obj.join('_') + "_#{field}"
+      end
+
+      def name_for(obj, field)
+        obj = [obj] unless obj.is_a?(Array)
+        first = obj.shift
+        first.to_s + obj.map { |o| "[#{o}]" }.join('') + "[#{field}]"
       end
   end
 end
