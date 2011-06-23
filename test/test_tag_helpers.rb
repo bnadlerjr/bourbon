@@ -24,6 +24,13 @@ class TestTagHelpers < Test::Unit::TestCase
     assert_equal expected, actual
   end
 
+  def test_label_skips_for_if_nil
+    expected = '<label>My Label</label>'
+    actual = label nil, nil, :text => 'My Label'
+
+    assert_equal expected, actual
+  end
+
   def test_basic_submit_tag
     expected = '<input value="Submit" type="submit" />'
     actual = submit
