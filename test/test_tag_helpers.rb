@@ -140,4 +140,32 @@ class TestTagHelpers < Test::Unit::TestCase
 
     assert_equal expected, actual
   end
+
+  def test_using_two_radio_objects_does_not_overwrite_obj
+    expected1 = '<input value="yes" type="radio" id="obj_item1" ' +
+      'name="obj[item1]" />'
+
+    expected2 = '<input value="yes" type="radio" id="obj_item2" ' +
+      'name="obj[item2]" />'
+
+    actual1 = radio :obj, :item1, :value => 'yes'
+    actual2 = radio :obj, :item2, :value => 'yes'
+
+    assert_equal expected1, actual1
+    assert_equal expected2, actual2
+  end
+
+  def test_using_two_nested_radio_objects_does_not_overwrite_obj
+    expected1 = '<input value="yes" type="radio" id="obj_sub_item1" ' +
+      'name="obj[sub][item1]" />'
+
+    expected2 = '<input value="yes" type="radio" id="obj_sub_item2" ' +
+      'name="obj[sub][item2]" />'
+
+    actual1 = radio [:obj, :sub], :item1, :value => 'yes'
+    actual2 = radio [:obj, :sub], :item2, :value => 'yes'
+
+    assert_equal expected1, actual1
+    assert_equal expected2, actual2
+  end
 end
